@@ -1,0 +1,17 @@
+{
+  "name": "devbox-sql",
+  "version": "1.1.0",
+  "description": "Gerenciar conexão com banco de bados sql",
+  "main": "mssql.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sql"
+  ],
+  "author": "Gustavo Maritan <gustavomaritan@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "mssql": "3.0.0"
+  }
+}
