@@ -5,7 +5,7 @@ var sql = require('mssql'),
 function initialize(dbConnect) {
     var databaseConnection = connectionPool(dbConnect);
 
-    return {
+    var req = {
         connection: databaseConnection,
         transaction: () => {
             return transaction(databaseConnection);
@@ -14,7 +14,8 @@ function initialize(dbConnect) {
             if (!conn && global.conexao)
                 return new sql.Request(global.conexao);
 
-            return (conn instanceof sql.Transaction ? conn.request() : new sql.Request(conn || databaseConnection));
+            req.object = (conn instanceof sql.Transaction ? conn.request() : new sql.Request(conn || databaseConnection));
+			return req.object;
         },
 		types: {
 			Bit: sql.Bit,
@@ -50,8 +51,21 @@ function initialize(dbConnect) {
 			Geography: sql.Geography,
 			Geometry: sql.Geometry
 		},
+		object: null,
+		getOutput: (name) => {
+			if (name && req.object.parameters[name]) {
+				return req.object.parameters[name].value;
+			} else {
+				for (let item in req.object.parameters)
+					if (req.object.parameters[item].io == 2)
+						return req.object.parameters[item].value;
+			}
+			return null;
+		},
 		execute: sqlExecute
-    }
+    };
+
+	return req;
 }
 
 //sempre informe conexão e callback ou callback (nessa ordem).
