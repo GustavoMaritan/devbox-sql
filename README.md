@@ -30,3 +30,18 @@ transaction.rollback(...);
 transaction.commit(...);
 
 ```
+
+## Recuperar parâmetro output
+...
+
+sql.request(transaction)
+    .input('Parametro', sql.types.Int, valorParametro)
+    .output('output_param', sql.types.Int)
+    .execute('procedure', (err,data) =>{
+        
+        let out = sql.getOutput(); * Retorna somente o primeiro output
+        or
+        let out = sql.getOutput('nome parâmetro output');
+        
+    });
+...
