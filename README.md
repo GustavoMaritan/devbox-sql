@@ -32,7 +32,7 @@ transaction.commit(...);
 ```
 
 ## Recuperar parâmetro output
-...
+```
 
 sql.request(transaction)
     .input('Parametro', sql.types.Int, valorParametro)
@@ -44,4 +44,5 @@ sql.request(transaction)
         let out = sql.getOutput('nome parâmetro output');
         
     });
-...
+    
+```
