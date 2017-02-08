@@ -62,6 +62,7 @@ function initialize(dbConnect) {
 			}
 			return null;
 		},
+	    	table: () => { return new sql.Table(); },
 		execute: sqlExecute
     };
 
